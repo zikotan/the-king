@@ -7,8 +7,7 @@ if (isNaN(size)) {
 } else {
   for (r = 0; r < size; r++) {
     row = '';
-    for (c = 0; c < size; c++) 
-      row += 'X';
+    for (c = 0; c < size; c++) row += 'X';
     console.log(row);
   }
 }
