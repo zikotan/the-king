@@ -1,7 +1,6 @@
 #!/usr/bin/python3
-"""taking in an argument and displays all values in the 
+"""taking in an argument and displays all values in the
 hbtn_0e_0_usa states where name matches the argument"""
-
 
 if __name__ == '__main__':
 
