@@ -17,5 +17,5 @@ if __name__ == "__main__":
     mySession = Session(myEng)
     for s in mySession.query(State)\
         .filter(State.name.like('%a%')).order_by(State.id):
-            print("{}: {}".format(s.id, s.name))
+        print("{}: {}".format(s.id, s.name))
     mySession.close()
