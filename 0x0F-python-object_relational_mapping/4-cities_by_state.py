@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""taking in an argument and displays all values in the
-hbtn_0e_0_usa states where name matches the argument
-and is safe from SQL injections"""
+"""listing hbtn_0e_4_usa all cities"""
 
 if __name__ == '__main__':
 
@@ -11,10 +9,11 @@ if __name__ == '__main__':
     myDB = MySQLdb.connect(
         host='localhost', port=3306, user=sys.argv[1],
         passwd=sys.argv[2], db=sys.argv[3])
-
     myCursor = myDB.cursor()
-    myCursor.execute("SELECT * FROM states WHERE name=%s\
-                ORDER BY states.id ASC", (sys.argv[4],))
+    myCursor.execute("SELECT cities.id, cities.name, states.name\
+                FROM cities LEFT JOIN states\
+                ON states.id = cities.state_id\
+                ORDER BY cities.id ASC")
     myRows = myCursor.fetchall()
     for r in myRows:
         print(r)
