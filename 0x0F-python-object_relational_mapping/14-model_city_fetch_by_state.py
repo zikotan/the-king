@@ -18,5 +18,5 @@ if __name__ == "__main__":
     mySess = Session(myEng)
     for s, c in mySess.query(State, City)\
         .filter(City.state_id == State.id).order_by(City.id).all():
-            print("{}: ({}) {}".format(s.name, c.id, c.name))
+        print("{}: ({}) {}".format(s.name, c.id, c.name))
     mySess.close()
