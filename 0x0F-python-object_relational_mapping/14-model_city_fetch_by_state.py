@@ -15,8 +15,11 @@ if __name__ == "__main__":
                           pool_pre_ping=True)
     Base.metadata.create_all(myEng)
 
-    mySess = Session(myEng)
-    for s, c in mySess.query(State, City)\
-        .filter(City.state_id == State.id).order_by(City.id).all():
+    S = Session(myEng)
+    C = City
+    CS_id = City.state_id
+    S_id = State.id
+    C_id = City.id
+    for s, c in S.query(State, C).filter(CS_id == S_id).order_by(C_id).all():
         print("{}: ({}) {}".format(s.name, c.id, c.name))
-    mySess.close()
+    S.close()
