@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""adding the “Louisiana” State object to hbtn_0e_6_usa"""
+"""changing the hbtn_0e_6_usa State object name"""
 
 if __name__ == "__main__":
 
@@ -15,9 +15,7 @@ if __name__ == "__main__":
     Base.metadata.create_all(myEng)
 
     mySess = Session(myEng)
-    myNew = State(name='Louisiana')
-    mySess.add(myNew)
-    myState = mySess.query(State).filter(State.name == 'Louisiana').first()
+    myState = mySess.query(State).filter(State.id == 2).first()
+    myState.name = 'New Mexico'
     mySess.commit()
-    print("{}".format(myState.id))
     mySess.close()
