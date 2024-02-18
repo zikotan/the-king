@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-"""deleting all State objects with a name containing
-the letter a from hbtn_0e_6_usa"""
+"""listing all hbtn_0e_101_usa City objects"""
 
 if __name__ == "__main__":
 
     import sys
-    from model_state import Base, State
+    from relationship_state import Base, State
+    from relationship_city import City
     from sqlalchemy import create_engine
     from sqlalchemy.orm import Session
     from sqlalchemy.schema import Table
@@ -15,8 +15,7 @@ if __name__ == "__main__":
                           pool_pre_ping=True)
     Base.metadata.create_all(myEng)
 
-    mySess = Session(myEng)
-    for s in mySess.query(State).filter(State.name.like('%a%')):
-        mySess.delete(s)
-    mySess.commit()
-    mySess.close()
+    mysess = Session(myEng)
+    for s in mysess.query(City).order_by(City.id).all():
+        print("{}: {} -> {}".format(s.id, s.name, s.state.name))
+    mysess.close()

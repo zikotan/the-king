@@ -1,11 +1,12 @@
 #!/usr/bin/python3
-"""printing all hbtn_0e_14_usa City objects"""
+"""adding the “California” State object with the City “San Francisco”
+to hbtn_0e_100_usa"""
 
 if __name__ == "__main__":
 
     import sys
-    from model_state import Base, State
-    from model_city import City
+    from relationship_state import Base, State
+    from relationship_city import City
     from sqlalchemy import create_engine
     from sqlalchemy.orm import Session
     from sqlalchemy.schema import Table
@@ -15,11 +16,10 @@ if __name__ == "__main__":
                           pool_pre_ping=True)
     Base.metadata.create_all(myEng)
 
-    S = Session(myEng)
-    C = City
-    CS_id = City.state_id
-    S_id = State.id
-    C_id = City.id
-    for s, c in S.query(State, C).filter(CS_id == S_id).order_by(C_id).all():
-        print("{}: ({}) {}".format(s.name, c.id, c.name))
-    S.close()
+    mySess = Session(myEng)
+    myCity = City(name='San Francisco')
+    theNew = State(name='California')
+    theNew.cities.append(myCity)
+    mySess.add_all([theNew, myCity])
+    mySess.commit()
+    mySess.close()
